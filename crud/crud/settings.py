@@ -107,13 +107,15 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'pt-br'  # Código de idioma para o Brasil
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Sao_Paulo'  # Fuso horário do Brasil
 
-USE_I18N = True
+USE_I18N = True  # Ativar internacionalização para traduções
 
-USE_TZ = True
+USE_L10N = True  # Ativar formatação local para números e datas
+
+USE_TZ = False  # Desativar o suporte a fuso horário
 
 
 # Static files (CSS, JavaScript, Images)
