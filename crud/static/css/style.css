@@ -1,0 +1,25 @@
+.carousel-item {
+    height: 60vh !important;
+}
+
+.carousel-item img {
+    height: 100% !important;
+    object-fit: cover !important;
+}
+
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+footer {
+    margin-top: auto;
+}
+
+
+/*
+.custom-carousel {
+    margin: 0 5rem !important;
+}*/

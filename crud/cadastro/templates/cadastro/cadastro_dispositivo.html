@@ -1,0 +1,29 @@
+<!-- cadastro/templates/cadastro/pagina_inicial.html -->
+{% include 'includes/header.html' %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Página Inicial do Cadastro</title>
+    <script>
+        window.onload = function() {
+            var dateInput = document.getElementById('data_aquisicao');
+            dateInput.onkeydown = function(e) {
+                e.preventDefault();
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Cadastro de Dispositivos</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="date" id="id_data_aquisicao" name="data_aquisicao">
+        <input type="submit" value="Cadastrar">
+    </form>
+</body>
+</html>
+
+{% include 'includes/footer.html' %}
