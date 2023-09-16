@@ -1,13 +1,13 @@
 # Arquivos de configuração do sistema
 *.json
-virtual
+virtual/
+myenv/
 *db
-dados
-Django
+dados/
+Django/
 *.pyc
 *.pyo
 __pycache__/
-db.sqlite3
 
 # Arquivos gerados pelo IDE ou editor de código
 .idea/
