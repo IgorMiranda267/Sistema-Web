@@ -1,0 +1,65 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+{% include 'includes/header.html' %}
+
+<section class="vh-100 padding">
+    <div class="container-fluid h-custom">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-md-9 col-lg-6 col-xl-5">
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+                    class="img-fluid" alt="Sample image">
+            </div>
+            <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+                <div class="card">
+                    <div class="card-header">
+                        Register
+                    </div>
+                    <div class="card-body">
+                        <!-- Bloco de código para exibir as mensagens -->
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-danger" role="alert">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                        <!-- Fim do bloco de código -->
+                        <form method="POST">
+                            {% csrf_token %}
+                            {{ form.non_field_errors }}
+                            <div class="form-group d-flex justify-content-end">
+                                <label for="{{ form.username.id_for_label }}" class="mr-2">Username:</label>
+                                {{ form.username }}
+                            </div>
+                            <div class="form-group d-flex justify-content-end">
+                                <label for="{{ form.email.id_for_label }}" class="mr-2">Email:</label>
+                                {{ form.email }}
+                            </div>
+                            <div class="form-group d-flex justify-content-end">
+                                <label for="{{ form.password1.id_for_label }}" class="mr-2">Password:</label>
+                                {{ form.password1 }}
+                            </div>
+                            <div class="form-group d-flex justify-content-end">
+                                <label for="{{ form.password2.id_for_label }}" class="mr-2">Confirm Password:</label>
+                                {{ form.password2 }}
+                            </div>
+                            <button type="submit" class="btn btn-primary">Register</button>
+                        </form>
+                        <p class="small fw-bold mt-2 pt-1 mb-0">Já possui uma conta? <a href="{% url 'login' %}"class="link-danger">Login</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% include 'includes/footer.html' %}
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

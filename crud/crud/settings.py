@@ -49,7 +49,11 @@ INSTALLED_APPS = [
     'historico',
     'cadastro',
     'home',
+    'crispy_forms',
+    
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
