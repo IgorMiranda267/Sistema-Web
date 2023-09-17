@@ -38,8 +38,6 @@ footer {
     color: white !important;
 }
 
-
-/* Adicione essas classes CSS ao seu arquivo de estilo */
 .card {
     border: none;
 }
@@ -49,6 +47,10 @@ footer {
     color: white;
     text-align: center;
     font-weight: bold;
+}
+
+.dropdown-menu a {
+    color: rgb(15, 15, 15) !important;
 }
 
 .card-body {
