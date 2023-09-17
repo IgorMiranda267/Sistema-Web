@@ -1,0 +1,52 @@
+/* Estilos específicos para a página de cadastro */
+
+/* Estilos.css */
+body.cadastro {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+.container.cadastro {
+    width: 50%;
+    margin: 0 auto;
+}
+
+h1.cadastro {
+    text-align: center;
+    color: #333;
+}
+
+form.cadastro {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+form.cadastro p {
+    margin-bottom: 20px;
+}
+
+form.cadastro label {
+    display: block;
+}
+
+form.cadastro input[type="text"],
+form.cadastro textarea,
+form.cadastro input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+form.cadastro input[type="submit"] {
+    background-color: #007BFF;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+}

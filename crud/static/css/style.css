@@ -1,0 +1,96 @@
+.carousel-item {
+    height: 60vh !important;
+}
+
+.carousel-item img {
+    height: 100% !important;
+    object-fit: cover !important;
+}
+
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+footer {
+    margin-top: auto;
+}
+
+.padding {
+    margin-top: 30px;
+}
+
+.titulo {
+    color: #bdbaba; /* Cinza claro */
+    font-family: 'Georgia', serif; /* Tipo de fonte */
+    /* font-size: 2em; Tamanho da fonte */
+    /* text-shadow: 2px 2px 4px #000000; Sombra do texto */
+}
+
+.nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+
+.navbar a {
+    color: white !important;
+}
+
+.card {
+    border: none;
+}
+
+.card-header {
+    background-color: #007bff;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+}
+
+.dropdown-menu a {
+    color: rgb(15, 15, 15) !important;
+}
+
+.card-body {
+    padding: 2rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+    padding: 0.5rem 2rem;
+    font-weight: bold;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+/* Estilos para o link "Register" abaixo do botão */
+.small a{
+    text-decoration: none;
+    color: #007bff;
+}
+
+.small a:hover {
+    text-decoration: underline;
+    color: #0056b3;
+}
+
+/*login*/
+.gradient-custom {
+    /* fallback for old browsers */
+    background: #6a11cb;
+    
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+    
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))
+    }
