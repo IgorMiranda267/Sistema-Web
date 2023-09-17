@@ -18,8 +18,17 @@ footer {
     margin-top: auto;
 }
 
+.padding {
+    margin-top: 30px;
+}
 
-/*
-.custom-carousel {
-    margin: 0 5rem !important;
-}*/
+.titulo {
+    color: #bdbaba; /* Cinza claro */
+    font-family: 'Georgia', serif; /* Tipo de fonte */
+    /* font-size: 2em; Tamanho da fonte */
+    /* text-shadow: 2px 2px 4px #000000; Sombra do texto */
+}
+
+.nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+}
