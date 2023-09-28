@@ -1,0 +1,42 @@
+# Arquivos de configuração do sistema
+*.json
+virtual/
+myenv/
+*db
+dados/
+Django/
+*.pyc
+*.pyo
+__pycache__/
+
+# Arquivos gerados pelo IDE ou editor de código
+.idea/
+.vscode/
+*.pyc
+
+# Dependências geradas automaticamente
+__pycache__/
+*.egg-info/
+dist/
+build/
+*.egg
+*.log
+*.swp
+
+# Arquivos de ambiente
+env
+.env
+.env.local
+.env.*.local
+
+# Arquivos de mídia (se você estiver usando o Django para armazenar mídia)
+media/
+
+# Arquivos de cache (se você estiver usando o cache do Django)
+cache/
+
+# Diretório de upload temporário (se você estiver usando o Django para upload de arquivos temporários)
+tmpuploads/
+
+# Arquivos de registro
+*.log
