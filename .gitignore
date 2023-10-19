@@ -1,7 +1,5 @@
 # Arquivos de configuração do sistema
 *.json
-virtual/
-myenv/
 *db
 dados/
 Django/
@@ -28,6 +26,9 @@ env
 .env
 .env.local
 .env.*.local
+venv
+virtual
+myenv
 
 # Arquivos de mídia (se você estiver usando o Django para armazenar mídia)
 media/

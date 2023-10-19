@@ -1,0 +1,58 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+{% include 'includes/header.html' %}
+
+<div class="container cadastro">
+
+    <h1 class="cadastro my-4">Cadastro de Dispositivos</h1>
+    
+    <form method="post" class="cadastro">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="id_departamento" class="form-label">Departamento:</label>
+            <input type="text" class="form-control" id="id_departamento" name="departamento">
+        </div>
+        <div class="form-group">
+            <label for="id_laboratorio" class="form-label">Laboratório:</label>
+            <input type="text" class="form-control" id="id_laboratorio" name="laboratorio">
+        </div>
+        <div class="form-group">
+            <label for="id_dispositivo" class="form-label">Dispositivo:</label>
+            <input type="text" class="form-control" id="id_dispositivo" name="dispositivo">
+        </div>
+        <div class="form-group">
+            <label for="id_identificacao_dispositivo" class="form-label">Identificação do Dispositivo:</label>
+            <input type="text" class="form-control" id="id_identificacao_dispositivo" name="identificacao_dispositivo">
+        </div>
+        <div class="form-group">
+            <label for="id_especificacoes_tecnicas" class="form-label">Especificações Técnicas:</label>
+            <textarea id="id_especificacoes_tecnicas" name="especificacoes_tecnicas" class="form-control"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="id_data_aquisicao" class="form-label">Data Aquisição:</label>
+            <input type="date" id="id_data_aquisicao" name="data_aquisicao" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="id_tipo_dispositivo" class="form-label">Tipo de Dispositivo:</label>
+            <select id="id_tipo_dispositivo" name="tipo_dispositivo" class="form-select">
+                <option value="notebook">Notebook</option>
+                <option value="computador">Computador</option>
+                <option value="datashow">Datashow</option>
+                <option value="monitor">Monitor</option>
+                <option value="mesa">Mesa</option>
+                <option value="cadeira">Cadeira</option>
+                <option value="impressora">Impressora</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Cadastrar</button>
+    </form>
+</div>
+
+{% include 'includes/footer.html' %}
+
+</body>
+
+</html>
