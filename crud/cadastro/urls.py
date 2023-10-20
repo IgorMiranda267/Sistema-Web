@@ -16,4 +16,7 @@ urlpatterns = [
    
    path('listar_falhas', views.listar_falhas, name='listar_falhas'),
    
+   path('detalhes/<int:dispositivo_id>/', views.detalhes_dispositivo, name='detalhes_dispositivo'),
+   
+   path('imprimir_qr_code/<int:dispositivo_id>/', views.imprimir_qr_code, name='imprimir_qr_code'),
 ]

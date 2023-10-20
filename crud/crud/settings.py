@@ -48,7 +48,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'bootstrap5',
     'cadastro',
-    'home'
+    'home',
+     'xhtml2pdf',
     #'rest_framework_swagger',
     #'rest_framework',
     #'rest_framework_simplejwt',
@@ -177,5 +178,7 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-#Inicia o ambiente virtual
-#source venv/bin/activate 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+ALLOWED_HOSTS = ['*']

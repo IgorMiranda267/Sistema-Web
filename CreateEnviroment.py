@@ -22,11 +22,13 @@ else:  # macOS e Linux
 comando_ativacao = ""
 
 if os.name == 'nt':  # Windows
-    comando_ativacao = f"{nome_ambiente}\\Scripts\\activate.bat"
+    comando_ativacao = f".\\{nome_ambiente}\\Scripts\\activate"
+    print(f"Para ativar o ambiente: {comando_ativacao}")
 else:  # macOS e Linux
-    comando_ativacao = f"source {nome_ambiente}/bin/activate"
+    comando_ativacao = f"source ./{nome_ambiente}/bin/activate"
+    print(f"Para ativar o ambiente: {comando_ativacao}")
 
 # Ativa o ambiente virtual
-subprocess.run(comando_ativacao, shell=True)
+#subprocess.run(comando_ativacao, shell=True)
 
 

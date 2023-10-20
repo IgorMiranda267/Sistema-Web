@@ -16,7 +16,7 @@
                         {{ dispositivo.departamento }} - {{ dispositivo.laboratorio }} - {{ dispositivo.dispositivo }}
                         - Tipo: {{ dispositivo.get_tipo_dispositivo_display }}
                     </button>
-                    <!-- Botões de editar e excluir -->
+                    <a href="{% url 'detalhes_dispositivo' dispositivo.id %}" class="btn btn-info float-right ml-2">Ir para detalhes do dispositivo & QR Code</a> 
                     <a href="{% url 'editar_dispositivo' dispositivo.id %}" class="btn btn-primary float-right ml-2">Editar</a>
                     <a href="{% url 'excluir_dispositivo' dispositivo.id %}" class="btn btn-danger float-right">Excluir</a>
                 </h2>

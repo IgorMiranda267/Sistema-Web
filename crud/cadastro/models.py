@@ -7,7 +7,6 @@ class Sala(models.Model):
     def __str__(self):
         return self.nome
 
-from django.utils import timezone
 class CadastroDispositivo(models.Model):
     departamento = models.CharField(max_length=100)
     laboratorio = models.CharField(max_length=100)
@@ -16,6 +15,7 @@ class CadastroDispositivo(models.Model):
     especificacoes_tecnicas = models.TextField()
     data_aquisicao = models.DateField()
     sala = models.ForeignKey(Sala, on_delete=models.CASCADE, default=None, null=True, blank=True)
+    qr_code = models.ImageField(upload_to='qrcodes/', null=True, blank=True)
     
     TIPOS_DE_DISPOSITIVO = (
         ('notebook', 'Notebook'),
@@ -35,6 +35,13 @@ class CadastroDispositivo(models.Model):
 
     def __str__(self):
         return f'{self.departamento} - {self.laboratorio} - {self.dispositivo}'
+    
+class QRCode(models.Model):
+    dispositivo = models.ForeignKey(CadastroDispositivo, on_delete=models.CASCADE)
+    qr_code_base64 = models.TextField(null=True, blank=True)  # Campo para armazenar a imagem do QR Code em base64
+
+    def __str__(self):
+        return f'QR Code para {self.dispositivo}'
         
 class Falha(models.Model):
     departamento = models.CharField(max_length=100)
@@ -50,9 +57,3 @@ class Falha(models.Model):
     def __str__(self):
         return f'Falha em {self.dispositivo.nome} - {self.data_ocorrencia}'
 
-class QRCode(models.Model):
-    dispositivo = models.ForeignKey(CadastroDispositivo, on_delete=models.CASCADE)
-    qr_code_url = models.URLField()
-
-    def __str__(self):
-        return f'QR Code para {self.dispositivo}'

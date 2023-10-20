@@ -25,12 +25,12 @@ if os.path.exists(nome_ambiente):
     atualizar_requirements(nome_ambiente)
 
     # Pergunta ao usuário se deseja apagar o ambiente virtual
-    resposta = input(f"Arquivo requirements atualizado! Deseja apagar o ambiente virtual '{nome_ambiente}'? [s] ou [n]: ").lower()
+    '''resposta = input(f"Arquivo requirements atualizado! Deseja apagar o ambiente virtual '{nome_ambiente}'? [s] ou [n]: ").lower()
 
     if resposta == 's':
         deletar_ambiente_virtual(nome_ambiente)
         print(f"Ambiente virtual '{nome_ambiente}' foi apagado.")
     else:
-        print(f"Ambiente virtual '{nome_ambiente}' foi mantido.")
+        print(f"Ambiente virtual '{nome_ambiente}' foi mantido.")'''
 else:
     print(f"Não foi possivel atualizar o arquivo requirements, ambiente virtual '{nome_ambiente}' não encontrado na raiz do projeto.")

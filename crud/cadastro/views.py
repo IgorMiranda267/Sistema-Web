@@ -10,6 +10,13 @@ from .forms import FormCadastroDispositivo
 from .models import CadastroDispositivo, QRCode
 import random
 import string
+from django.http import HttpResponse
+from django.shortcuts import get_object_or_404, render
+from xhtml2pdf import pisa
+from io import BytesIO
+from django.template.loader import get_template
+from django.http import HttpResponse
+from django.urls import reverse
 
 def gerar_protocolo(length=6):
     caracteres_permitidos = string.ascii_uppercase + string.digits
@@ -17,12 +24,21 @@ def gerar_protocolo(length=6):
 
     return protocolo
 
+import qrcode
+import base64
+
+from django.core.files.storage import default_storage
+from django.core.files.base import ContentFile
+
 def cadastro_dispositivo(request):
     if request.method == 'POST':
         form = FormCadastroDispositivo(request.POST)
         if form.is_valid():
             novo_dispositivo = form.save()
 
+            # Domínio personalizado
+            custom_domain = "http://site"  # Substitua pelo seu domínio real
+            
             # Gere o QR code
             qr = qrcode.QRCode(
                 version=1,
@@ -30,25 +46,40 @@ def cadastro_dispositivo(request):
                 box_size=10,
                 border=4,
             )
-            qr.add_data(f'URL_PARA_DETALHES_DO_DISPOSITIVO/{novo_dispositivo.id}/')
+            
+            # Gere a URL real para a página de detalhes do dispositivo usando a reversão de URL
+            detalhes_url = reverse('detalhes_dispositivo', args=[novo_dispositivo.id])
+            
+            # Construa a URL completa com o domínio personalizado
+            full_url = f"{custom_domain}{detalhes_url}"
+            
+            qr.add_data(full_url)
             qr.make(fit=True)
 
             img = qr.make_image(fill_color="black", back_color="white")
             buffer = BytesIO()
-            img.save(buffer)
-            buffer.seek(0)
+            img.save(buffer, format="PNG")
+
+            # Salve o QR code na pasta 'qrcodes' dentro de 'media'
+            file_name = f'qrcodes/qrcode_{novo_dispositivo.id}.png'
+            default_storage.save(file_name, ContentFile(buffer.getvalue()))
+
+            # Atualize o campo qr_code do objeto CadastroDispositivo com o caminho do arquivo
+            novo_dispositivo.qr_code = file_name
+            novo_dispositivo.save()
 
             # Crie um objeto QRCode associado ao dispositivo
-            qr_code_obj = QRCode(dispositivo=novo_dispositivo, qr_code_url='URL_PARA_O_ARQUIVO_DO_QR_CODE')
+            qr_code_obj = QRCode(dispositivo=novo_dispositivo, qr_code_base64=None)  # Substitua por qr_code_base64, se necessário
             qr_code_obj.save()
 
             print("Novo dispositivo salvo com sucesso:", novo_dispositivo)
-            return redirect('pagina_inicial')
+            return render(request, 'cadastro/popup_qr_code.html', {'dispositivo': novo_dispositivo})
         else:
             print("Erros no formulário:", form.errors)
     else:
         form = FormCadastroDispositivo()
     return render(request, 'cadastro/cadastro_dispositivo.html', {'form': form})
+
 
 def editar_dispositivo(request, dispositivo_id):
     dispositivo = get_object_or_404(CadastroDispositivo, pk=dispositivo_id)
@@ -92,6 +123,29 @@ def listar_falhas(request):
 def listar_dispositivos_e_falhas(request):
     dispositivos = CadastroDispositivo.objects.all()
     return render(request, 'cadastro/listar_dispositivos_e_falhas.html', {'dispositivos': dispositivos})
+
+def detalhes_dispositivo(request, dispositivo_id):
+    dispositivo = CadastroDispositivo.objects.get(pk=dispositivo_id)
+    qr_code_obj = QRCode.objects.get(dispositivo=dispositivo)
+    return render(request, 'cadastro/detalhes_dispositivo.html', {'dispositivo': dispositivo, 'qr_code_obj': qr_code_obj})
+
+
+import base64
+
+def imprimir_qr_code(request, dispositivo_id):
+    dispositivo = get_object_or_404(CadastroDispositivo, pk=dispositivo_id)
+    qr_code_obj = QRCode.objects.get(dispositivo=dispositivo)
+
+    # Converta a imagem do QR Code de base64 para bytes
+    qr_code_image = base64.b64decode(qr_code_obj.qr_code_base64.encode('utf-8'))
+
+    # Defina o tipo de resposta
+    response = HttpResponse(qr_code_image, content_type='image/png')
+    response['Content-Disposition'] = f'attachment; filename="qrcode_dispositivo_{dispositivo_id}.png"'
+
+    return response
+
+
 
 
 
