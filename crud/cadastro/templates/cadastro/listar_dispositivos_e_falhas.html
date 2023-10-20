@@ -36,8 +36,11 @@
                         <div class="col-md-3">
                             <strong>Descrição da Falha:</strong> {{ falha.descricao_falha }}
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             <strong>Data de Ocorrência:</strong> {{ falha.data_ocorrencia }}
+                        </div>
+                        <div class="col-md-1">
+                            <strong>Protocolo:</strong> <a href="{% url 'ver_protocolo' falha.protocolo %}">{{ falha.protocolo }}</a>
                         </div>
                     </div>
                     {% endfor %}
