@@ -1,5 +1,6 @@
 <!-- header.html -->
 {% load static %}
+{% load static widget_tweaks %}
 
 <head>
     <meta charset="UTF-8">
@@ -37,22 +38,48 @@
 
                     <!-- Dropdown para Falhas -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownFalhas" role="button"
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownFalhas" role a-button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Falhas
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownFalhas">
-                            <a class="dropdown-item" href="{% url 'cadastro_falha' %}">Cadastrar Falhas em Dispositivo</a>
+                            <a class="dropdown-item" href="{% url 'cadastro_falha' %}">Cadastrar Falhas em
+                                Dispositivo</a>
                             <a class="dropdown-item" href="{% url 'listar_falhas' %}">Listar Falhas em Dispositivo</a>
                         </div>
                     </li>
+
+                    <!-- Dropdown para Manutenções -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownManutencoes" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Manutenções
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownManutencoes">
+                            <a class="dropdown-item" href="{% url 'cadastrar_manutencao' %}">Cadastrar Manutenção</a>
+                            <a class="dropdown-item" href="{% url 'listar_manutencoes' %}">Listar Manutenções</a>
+                        </div>
+                    </li>
+
+                    <!-- Dropdown para Departamento/Salas -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownDepartamento" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Departamento
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownDepartamento">
+                            <a class="dropdown-item" href="{% url 'cadastro_sala' %}">Cadastrar Sala</a>
+                            <a class="dropdown-item" href="{% url 'listar_salas' %}">Salas Cadastradas</a>
+                        </div>
+                    </li>
+
 
                     <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
                     {% else %}
                     <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'register' %}">Cadastre-se</a></li>
-                {% endif %}
-            </ul>
+                    {% endif %}
+                </ul>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>

@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'departamento',
     'falha',
     'home',
+    'widget_tweaks'
     # 'xhtml2pdf',
     #'rest_framework_swagger',
     #'rest_framework',
@@ -139,7 +140,7 @@ DATABASES = {
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
 
-SESSION_COOKIE_AGE = 300
+SESSION_COOKIE_AGE = 12 * 60 * 60 
 
 AUTH_PASSWORD_VALIDATORS = [
     {

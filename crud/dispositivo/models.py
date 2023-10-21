@@ -3,8 +3,6 @@ from departamento.models import Sala
 
 # Create your models here.
 class CadastroDispositivo(models.Model):
-    departamento = models.CharField(max_length=100)
-    laboratorio = models.CharField(max_length=100)
     dispositivo = models.CharField(max_length=100)
     identificacao_dispositivo = models.CharField(max_length=50)
     especificacoes_tecnicas = models.TextField()
@@ -27,9 +25,13 @@ class CadastroDispositivo(models.Model):
         choices=TIPOS_DE_DISPOSITIVO,
         default='notebook',
     )
-
+    
     def __str__(self):
-        return f'{self.departamento} - {self.laboratorio} - {self.dispositivo}'
+        try:
+            return f'{self.sala.nome} - {self.dispositivo} - ID: {self.identificacao_dispositivo}'
+        except Exception as e:
+            return f'{self.dispositivo} - ID: {self.identificacao_dispositivo}'
+
     
 class QRCode(models.Model):
     dispositivo = models.ForeignKey(CadastroDispositivo, on_delete=models.CASCADE)

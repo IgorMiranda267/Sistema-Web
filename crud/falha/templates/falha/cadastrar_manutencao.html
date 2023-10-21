@@ -1,0 +1,51 @@
+{% load static %}
+{% load static widget_tweaks %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+{% include 'includes/header.html' %}
+
+<div class="container mt-5">
+    <h1 class="mb-4">Cadastrar Manutenção</h1>
+
+    <!-- Exiba informações sobre a falha -->
+    <div class="mb-3">
+        <h3>Informações da Falha</h3>
+        <p>Dispositivo: {{ falha.dispositivo }}</p>
+        <p>Descrição da Falha: {{ falha.descricao_falha }}</p>
+        <p>Data de Ocorrência: {{ falha.data_ocorrencia }}</p>
+    </div>
+
+    <form method="post">
+        {% csrf_token %}
+        <input type="hidden" name="falha_id" value="{{ falha_id }}">
+        
+        <div class="mb-3">
+            <label for="{{ manutencao_form.tipo_manutencao.id_for_label }}" class="form-label">Tipo de Manutenção:</label>
+            {{ manutencao_form.tipo_manutencao|add_class:"form-control" }}
+        </div> 
+
+        <div class="mb-3">
+            <label for="{{ manutencao_form.materiais_utilizados.id_for_label }}" class="form-label">Materiais Utilizados:</label>
+            {{ manutencao_form.materiais_utilizados|add_class:"form-control" }}
+        </div>
+
+        <div class="mb-3">
+            <label for="{{ manutencao_form.status.id_for_label }}" class="form-label">Status:</label>
+            {{ manutencao_form.status|add_class:"form-control" }}
+        </div>
+
+        <div class="mb-3">
+            <label for="{{ manutencao_form.data_finalizacao.id_for_label }}" class="form-label">Data de Finalização:</label>
+            {{ manutencao_form.data_finalizacao|add_class:"form-control" }}
+        </div>        
+        
+        <button type="submit" class="btn btn-primary">Cadastrar Manutenção</button>
+    </form>
+
+    <a href="{% url 'pagina_inicial' %}" class="btn btn-secondary mt-3">Voltar para a página inicial</a>
+</div>
+
+{% include 'includes/footer.html' %}
+</body>
+</html>

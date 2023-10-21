@@ -1,0 +1,30 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+{% include 'includes/header.html' %}
+
+<div class="container mt-5">
+    <h1 class="mb-4">Atualizar Status de Manutenção</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="{{ manutencao_form.status.id_for_label }}" class="form-label">Status:</label>
+            {{ manutencao_form.status|add_class:"form-control" }}
+        </div>
+
+        <div class="mb-3">
+            <label for="{{ manutencao_form.data_finalizacao.id_for_label }}" class="form-label">Data de Finalização:</label>
+            {{ manutencao_form.data_finalizacao|add_class:"form-control" }}
+        </div>
+
+        <button type="submit" class="btn btn-primary">Atualizar Status</button>
+    </form>
+
+    <a href="{% url 'pagina_inicial' %}" class="btn btn-secondary mt-3">Voltar para a página inicial</a>
+</div>
+
+{% include 'includes/footer.html' %}
+</body>
+</html>

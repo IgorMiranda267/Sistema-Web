@@ -1,60 +1,110 @@
 {% load static %}
+{% load static widget_tweaks %}
 
 <!DOCTYPE html>
 <html lang="pt-br">
 {% include 'includes/header.html' %}
 
-<div class="container">
-    <h1>Detalhes do Dispositivo</h1>
+<div class="container mt-5">
+    <h1 class="mb-4">Detalhes do Dispositivo</h1>
 
-    <div class="mb-3">
-        <label class="form-label">Departamento:</label>
-        <p>{{ dispositivo.departamento }}</p>
+    <table class="table table-bordered table-hover">
+        <tr>
+            <th class="col-md-3">Sala pertencente:</th>
+            <td>{{ dispositivo.sala }}</td>
+        </tr>
+        <tr>
+            <th>Dispositivo:</th>
+            <td>{{ dispositivo.dispositivo }}</td>
+        </tr>
+        <tr>
+            <th>Identificação do Dispositivo:</th>
+            <td>{{ dispositivo.identificacao_dispositivo }}</td>
+        </tr>
+        <tr>
+            <th>Especificações Técnicas:</th>
+            <td>{{ dispositivo.especificacoes_tecnicas }}</td>
+        </tr>
+        <tr>
+            <th>Data Aquisição:</th>
+            <td>{{ dispositivo.data_aquisicao }}</td>
+        </tr>
+        <tr>
+            <th>Tipo de Dispositivo:</th>
+            <td>{{ dispositivo.get_tipo_dispositivo_display }}</td>
+        </tr>
+    </table>
+
+    <div class="mb-4">
+        <h2 class="mb-3">QR Code:</h2>
+        <img class="img-fluid" src="{{ dispositivo.qr_code.url }}" alt="QR Code do Dispositivo">
     </div>
 
+    <h2 class="mb-3">Histórico de Falhas</h2>
     <div class="mb-3">
-        <label class="form-label">Laboratório:</label>
-        <p>{{ dispositivo.laboratorio }}</p>
+        <select class="form-select">
+            <option value="">Selecione uma falha existente</option>
+            {% for falha in falhas %}
+            <option value="{{ falha.id }}">{{ falha.data_ocorrencia }} - {{ falha.descricao_falha }}</option>
+            {% endfor %}
+        </select>
     </div>
 
-    <div class="mb-3">
-        <label class="form-label">Dispositivo:</label>
-        <p>{{ dispositivo.dispositivo }}</p>
-    </div>
+    <!--h2 class="mb-3">Cadastrar Nova Falha</h2>
+    <form method="post" class="mb-4">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="{{ falha_form.dispositivo.id_for_label }}" class="form-label">Dispositivo:</label>
+            {{ form.dispositivo|add_class:"form-select" }}
+        </div> 
+        <div class="mb-3">
+            <label for="{{ falha_form.tipo_manutencao.id_for_label }}" class="form-label">Tipo de Manutenção:</label>
+            {{ falha_form.tipo_manutencao |add_class:"form-control" }}
+        </div>
 
-    <div class="mb-3">
-        <label class="form-label">Identificação do Dispositivo:</label>
-        <p>{{ dispositivo.identificacao_dispositivo }}</p>
-    </div>
+        <div class="mb-3">
+            <label for="{{ falha_form.descricao_falha.id_for_label }}" class="form-label">Descrição da Falha:</label>
+            {{ falha_form.descricao_falha|add_class:"form-control" }}
+        </div>
 
-    <div class="mb-3">
-        <label class="form-label">Especificações Técnicas:</label>
-        <p>{{ dispositivo.especificacoes_tecnicas }}</p>
-    </div>
+        <div class="mb-3">
+            <label for="{{ falha_form.data_ocorrencia.id_for_label }}" class="form-label">Data de Ocorrência:</label>
+            {{ falha_form.data_ocorrencia|add_class:"form-control" }}
+        </div>
 
-    <div class="mb-3">
-        <label class="form-label">Data Aquisição:</label>
-        <p>{{ dispositivo.data_aquisicao }}</p>
-    </div>
+        <button type="submit" class="btn btn-primary">Cadastrar Falha</button>
+    </form-->
 
+    <h2 class="mb-3">Manutenções</h2>
     <div class="mb-3">
-        <label class="form-label">Tipo de Dispositivo:</label>
-        <p>{{ dispositivo.get_tipo_dispositivo_display }}</p>
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Protocolo</th>
+                    <th>Tipo de Manutenção</th>
+                    <th>Materiais Utilizados</th>
+                    <th>Status</th>
+                    <th>Data de Finalização</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for manutencao in manutencoes %}
+                <tr>
+                    <td>{{ manutencao.protocolo }}</td>
+                    <td>{{ manutencao.tipo_manutencao }}</td>
+                    <td>{{ manutencao.materiais_utilizados }}</td>
+                    <td>{{ manutencao.status }}</td>
+                    <td>{{ manutencao.data_finalizacao }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
-
-    <!-- Exibe o QR Code -->
-    <div class="mb-3">
-        <h2>QR Code:</h2>
-        <img src="{{ dispositivo.qr_code.url }}" alt="QR Code do Dispositivo">
-    </div>    
 
     <a href="{% url 'pagina_inicial' %}" class="btn btn-secondary">Voltar para a página inicial</a>
 </div>
 
 {% include 'includes/footer.html' %}
-
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 
 </html>

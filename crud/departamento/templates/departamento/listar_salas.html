@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+{% include 'includes/header.html' %}
+<div class="container">
+    <h1 class="my-4">Lista de Salas</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Descrição</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for sala in salas %}
+                <tr>
+                    <td>{{ sala.nome }}</td>
+                    <td>{{ sala.descricao }}</td>
+                    <td>
+                        <a href="{% url 'editar_sala' sala.id %}" class="btn btn-primary">Editar</a>
+                        <a href="{% url 'excluir_sala' sala.id %}" class="btn btn-danger">Excluir</a>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="3">Nenhuma sala cadastrada.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% include 'includes/footer.html' %}
+</body>
+</html>

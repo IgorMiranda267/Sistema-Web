@@ -11,13 +11,14 @@
     <form method="post" class="cadastro">
         {% csrf_token %}
         <div class="mb-3">
-            <label for="id_departamento" class="form-label">Departamento:</label>
-            <input type="text" class="form-control" id="id_departamento" name="departamento">
-        </div>
-        <div class="mb-3">
-            <label for="id_laboratorio" class="form-label">Laboratório:</label>
-            <input type="text" class="form-control" id="id_laboratorio" name="laboratorio">
-        </div>
+            <label for="id_sala" class="form-label">Sala:</label>
+            <select id="id_sala" name="sala" class="form-select">
+                <option value="">Selecione uma sala</option>
+                {% for sala in salas %}
+                    <option value="{{ sala.id }}">{{ sala.nome }}</option>
+                {% endfor %}
+            </select>
+        </div>        
         <div class="mb-3">
             <label for="id_dispositivo" class="form-label">Dispositivo:</label>
             <input type="text" class="form-control" id="id_dispositivo" name="dispositivo">

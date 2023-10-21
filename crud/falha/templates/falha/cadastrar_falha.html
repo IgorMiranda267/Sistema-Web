@@ -1,4 +1,5 @@
 {% load static %}
+{% load static widget_tweaks %}
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -11,30 +12,9 @@
     <form method="post" class="cadastro">
         {% csrf_token %}
         <div class="form-group">
-            <label for="id_departamento" class="form-label">Departamento:</label>
-            <input type="text" class="form-control" id="id_departamento" name="departamento">
-        </div>
-        <div class="form-group">
-            <label for="id_laboratorio" class="form-label">Laboratório:</label>
-            <input type="text" class="form-control" id="id_laboratorio" name="laboratorio">
-        </div>
-        <div class="form-group">
-            <label for="id_tipo_manutencao" class="form-label">Tipo de Manutenção:</label>
-            <input type="text" class="form-control" id="id_tipo_manutencao" name="tipo_manutencao">
-        </div>
-        <div class="form-group">
-            <label for="id_dispositivo" class="form-label">Dispositivo:</label>
-            <select class="form-control" id="id_dispositivo" name="dispositivo">
-                <option value="">Selecione um dispositivo</option>
-                {% for dispositivo in dispositivos %}
-                <option value="{{ dispositivo.id }}">{{ dispositivo.dispositivo }}</option>
-                {% endfor %}
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="id_identificacao_dispositivo" class="form-label">Identificação do Dispositivo:</label>
-            <input type="text" class="form-control" id="id_identificacao_dispositivo" name="identificacao_dispositivo">
-        </div>
+            <label for="{{ form.dispositivo.id_for_label }}" class="form-label">Dispositivo:</label>
+            {{ form.dispositivo|add_class:"form-select" }}
+        </div> 
         <div class="form-group">
             <label for="id_descricao_falha" class="form-label">Descrição da Falha:</label>
             <textarea class="form-control" id="id_descricao_falha" name="descricao_falha" rows="4"></textarea>
@@ -47,11 +27,10 @@
     </form>
 
     <a href="{% url 'listar_falhas' %}" class="btn btn-secondary mt-2">Voltar para a lista de falhas</a>
-    
+
 </div>
 
 {% include 'includes/footer.html' %}
 
 </body>
-
 </html>

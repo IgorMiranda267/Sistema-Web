@@ -3,8 +3,8 @@ from .models import CadastroDispositivo
 
 # Register your models here.
 class CadastroDispositivoAdmin(admin.ModelAdmin):
-    list_display = ('departamento', 'laboratorio', 'dispositivo', 'identificacao_dispositivo', 'data_aquisicao')
-    search_fields = ('departamento', 'laboratorio', 'dispositivo', 'identificacao_dispositivo')
-    list_filter = ('departamento', 'laboratorio', 'data_aquisicao')
+    list_display = ('sala', 'dispositivo', 'identificacao_dispositivo', 'data_aquisicao')
+    search_fields = ('sala', 'dispositivo', 'identificacao_dispositivo')
+    list_filter = ('sala', 'data_aquisicao')
 
 admin.site.register(CadastroDispositivo, CadastroDispositivoAdmin)

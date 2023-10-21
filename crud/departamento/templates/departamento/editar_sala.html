@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+{% include 'includes/header.html' %}
+<div class="container cadastro">
+    <h1 class="cadastro my-4">Editar Sala</h1>
+    <form method="post" class="cadastro">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="id_nome" class="form-label">Nome da Sala:</label>
+            <input type="text" class="form-control" id="id_nome" name="nome" value="{{ sala.nome }}">
+        </div>
+        <div class="mb-3">
+            <label for="id_descricao" class="form-label">Descrição:</label>
+            <textarea id="id_descricao" name="descricao" class="form-control">{{ sala.descricao }}</textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+    </form>
+</div>
+{% include 'includes/footer.html' %}
+</body>
+</html>
