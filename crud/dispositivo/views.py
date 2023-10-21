@@ -1,35 +1,23 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import CadastroDispositivo, Falha
-from .forms import FormCadastroDispositivo, FormFalha
 from django.utils.dateformat import DateFormat
-import qrcode
-from io import BytesIO
-from django.core.files import File
-from django.shortcuts import render, redirect
 from .forms import FormCadastroDispositivo
 from .models import CadastroDispositivo, QRCode
+from django.http import HttpResponse
+from django.core.files.storage import default_storage
+from django.core.files.base import ContentFile
+from io import BytesIO
+from django.urls import reverse
+import qrcode
+import base64
 import random
 import string
-from django.http import HttpResponse
-from django.shortcuts import get_object_or_404, render
-from xhtml2pdf import pisa
-from io import BytesIO
-from django.template.loader import get_template
-from django.http import HttpResponse
-from django.urls import reverse
 
 def gerar_protocolo(length=6):
     caracteres_permitidos = string.ascii_uppercase + string.digits
     protocolo = ''.join(random.choice(caracteres_permitidos) for _ in range(length))
 
     return protocolo
-
-import qrcode
-import base64
-
-from django.core.files.storage import default_storage
-from django.core.files.base import ContentFile
-
+ 
 def cadastro_dispositivo(request):
     if request.method == 'POST':
         form = FormCadastroDispositivo(request.POST)
@@ -73,14 +61,13 @@ def cadastro_dispositivo(request):
             qr_code_obj.save()
 
             print("Novo dispositivo salvo com sucesso:", novo_dispositivo)
-            return render(request, 'cadastro/popup_qr_code.html', {'dispositivo': novo_dispositivo})
+            return render(request, 'dispositivo/popup_qr_code.html', {'dispositivo': novo_dispositivo})
         else:
             print("Erros no formulário:", form.errors)
     else:
         form = FormCadastroDispositivo()
-    return render(request, 'cadastro/cadastro_dispositivo.html', {'form': form})
-
-
+    return render(request, 'dispositivo/cadastro_dispositivo.html', {'form': form})
+ 
 def editar_dispositivo(request, dispositivo_id):
     dispositivo = get_object_or_404(CadastroDispositivo, pk=dispositivo_id)
     if request.method == 'POST':
@@ -93,44 +80,23 @@ def editar_dispositivo(request, dispositivo_id):
         dispositivo.data_aquisicao = df.format('Y-m-d')
         form = dispositivo
 
-    return render(request, 'cadastro/editar_dispositivo.html', {'form': form})
+    return render(request, 'dispositivo/editar_dispositivo.html', {'form': form})
 
 def excluir_dispositivo(request, dispositivo_id):
     dispositivo = get_object_or_404(CadastroDispositivo, pk=dispositivo_id)
     if request.method == 'POST':
         dispositivo.delete()
         return redirect('listar_dispositivos_e_falhas')
-    return render(request, 'cadastro/excluir_dispositivo.html', {'dispositivo': dispositivo})
-
-def cadastrar_falha(request):
-    dispositivos = CadastroDispositivo.objects.all()
-    if request.method == 'POST':
-        form = FormFalha(request.POST)
-        if form.is_valid():
-            falha = form.save(commit=False)
-            falha.protocolo = gerar_protocolo()
-            falha.save()
-            return redirect('listar_falhas')
-    else:
-        form = FormFalha()
-
-    return render(request, 'cadastro/cadastrar_falha.html', {'form': form, 'dispositivos': dispositivos})
-
-def listar_falhas(request):
-    falhas = Falha.objects.all()
-    return render(request, 'cadastro/listar_falhas.html', {'falhas': falhas})
+    return render(request, 'dispositivo/excluir_dispositivo.html', {'dispositivo': dispositivo})
 
 def listar_dispositivos_e_falhas(request):
     dispositivos = CadastroDispositivo.objects.all()
-    return render(request, 'cadastro/listar_dispositivos_e_falhas.html', {'dispositivos': dispositivos})
+    return render(request, 'dispositivo/listar_dispositivos_e_falhas.html', {'dispositivos': dispositivos})
 
 def detalhes_dispositivo(request, dispositivo_id):
     dispositivo = CadastroDispositivo.objects.get(pk=dispositivo_id)
     qr_code_obj = QRCode.objects.get(dispositivo=dispositivo)
-    return render(request, 'cadastro/detalhes_dispositivo.html', {'dispositivo': dispositivo, 'qr_code_obj': qr_code_obj})
-
-
-import base64
+    return render(request, 'dispositivo/detalhes_dispositivo.html', {'dispositivo': dispositivo, 'qr_code_obj': qr_code_obj})
 
 def imprimir_qr_code(request, dispositivo_id):
     dispositivo = get_object_or_404(CadastroDispositivo, pk=dispositivo_id)
@@ -144,10 +110,3 @@ def imprimir_qr_code(request, dispositivo_id):
     response['Content-Disposition'] = f'attachment; filename="qrcode_dispositivo_{dispositivo_id}.png"'
 
     return response
-
-
-
-
-
-
-

@@ -7,8 +7,10 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('', RedirectView.as_view(url='/home/login', permanent=False)),
     path('admin/', admin.site.urls),
-    path('cadastro/', include('cadastro.urls')),
     path('home/', include('home.urls')),
+    path('falha/', include('falha.urls')),
+    path('dispositivo/', include('dispositivo.urls')),
+    path('departamento/', include('departamento.urls')),
 ]
 
 if settings.DEBUG:

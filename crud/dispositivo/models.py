@@ -1,12 +1,7 @@
 from django.db import models
+from departamento.models import Sala
 
-class Sala(models.Model):
-    nome = models.CharField(max_length=100, unique=True)
-    descricao = models.TextField(blank=True, null=True) 
-
-    def __str__(self):
-        return self.nome
-
+# Create your models here.
 class CadastroDispositivo(models.Model):
     departamento = models.CharField(max_length=100)
     laboratorio = models.CharField(max_length=100)
@@ -42,18 +37,3 @@ class QRCode(models.Model):
 
     def __str__(self):
         return f'QR Code para {self.dispositivo}'
-        
-class Falha(models.Model):
-    departamento = models.CharField(max_length=100)
-    laboratorio = models.CharField(max_length=100)
-    tipo_manutencao = models.CharField(max_length=50)
-    dispositivo = models.ForeignKey('CadastroDispositivo', on_delete=models.CASCADE)
-    identificacao_dispositivo = models.CharField(max_length=50)
-    descricao_falha = models.TextField()
-    data_ocorrencia = models.DateField()
-    protocolo = models.CharField(max_length=10) 
-    data_geracao = models.DateTimeField(auto_now_add=True)  
-
-    def __str__(self):
-        return f'Falha em {self.dispositivo.nome} - {self.data_ocorrencia}'
-
