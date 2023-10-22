@@ -14,12 +14,15 @@ import qrcode
 import base64
 import random
 import string
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def gerar_protocolo(length=6):
     caracteres_permitidos = string.ascii_uppercase + string.digits
     protocolo = ''.join(random.choice(caracteres_permitidos) for _ in range(length))
     return protocolo
- 
+
+@login_required
 def cadastro_dispositivo(request):
     salas = Sala.objects.all()
     if request.method == 'POST':
@@ -56,6 +59,7 @@ def cadastro_dispositivo(request):
         form = FormCadastroDispositivo()
     return render(request, 'dispositivo/cadastro_dispositivo.html', {'form': form, 'salas': salas})
 
+@login_required
 def editar_dispositivo(request, dispositivo_id):
     dispositivo = get_object_or_404(CadastroDispositivo, pk=dispositivo_id)
     if request.method == 'POST':
@@ -69,6 +73,7 @@ def editar_dispositivo(request, dispositivo_id):
         form = dispositivo
     return render(request, 'dispositivo/editar_dispositivo.html', {'form': form})
 
+@login_required
 def excluir_dispositivo(request, dispositivo_id):
     dispositivo = get_object_or_404(CadastroDispositivo, pk=dispositivo_id)
     if request.method == 'POST':
@@ -76,10 +81,12 @@ def excluir_dispositivo(request, dispositivo_id):
         return redirect('listar_dispositivos_e_falhas')
     return render(request, 'dispositivo/excluir_dispositivo.html', {'dispositivo': dispositivo})
 
+@login_required
 def listar_dispositivos_e_falhas(request):
     dispositivos = CadastroDispositivo.objects.all()
     return render(request, 'dispositivo/listar_dispositivos_e_falhas.html', {'dispositivos': dispositivos})
 
+@login_required
 def detalhes_dispositivo(request, dispositivo_id):
     dispositivo = CadastroDispositivo.objects.get(pk=dispositivo_id)
     qr_code_obj = QRCode.objects.get(dispositivo=dispositivo)
@@ -111,6 +118,7 @@ def detalhes_dispositivo(request, dispositivo_id):
     }
     return render(request, 'dispositivo/detalhes_dispositivo.html', context)
 
+@login_required
 def imprimir_qr_code(request, dispositivo_id):
     dispositivo = get_object_or_404(CadastroDispositivo, pk=dispositivo_id)
     qr_code_obj = QRCode.objects.get(dispositivo=dispositivo)

@@ -2,7 +2,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from dispositivo.views import gerar_protocolo
 from .models import Falha, Manutencao
 from .forms import FalhaForm, FormManutencao
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def cadastrar_falha(request):
     
     if request.method == 'POST':
@@ -17,7 +19,8 @@ def cadastrar_falha(request):
         form = FalhaForm()
 
     return render(request, 'falha/cadastrar_falha.html', {'form': form})
-   
+ 
+@login_required   
 def listar_falhas(request):
     falhas_com_manutencao = []
 
@@ -38,6 +41,7 @@ def listar_falhas(request):
 
     return render(request, 'falha/listar_falhas.html', {'falhas': falhas_com_manutencao})
 
+@login_required
 def cadastrar_manutencao(request, falha_id=None):
     falha = None
     if falha_id:
@@ -60,11 +64,12 @@ def cadastrar_manutencao(request, falha_id=None):
 
     return render(request, 'falha/cadastrar_manutencao.html', {'manutencao_form': form, 'falha': falha, 'falha_id': falha_id})
 
-
+@login_required
 def listar_manutencoes(request):
     manutencoes = Manutencao.objects.all()
     return render(request, 'falha/listar_manutencoes.html', {'manutencoes': manutencoes})
 
+@login_required
 def editar_manutencao(request, manutencao_id):
     manutencao = get_object_or_404(Manutencao, pk=manutencao_id)
     if request.method == 'POST':
@@ -78,6 +83,7 @@ def editar_manutencao(request, manutencao_id):
         print(form)
     return render(request, 'falha/editar_manutencao.html', {'form': form, 'manutencao': manutencao})
 
+@login_required
 def atualizar_status_manutencao(request, manutencao_id):
     manutencao = get_object_or_404(Manutencao, pk=manutencao_id)
     if request.method == 'POST':

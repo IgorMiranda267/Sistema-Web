@@ -51,12 +51,12 @@ INSTALLED_APPS = [
     'departamento',
     'falha',
     'home',
-    'widget_tweaks'
-    # 'xhtml2pdf',
-    #'rest_framework_swagger',
-    #'rest_framework',
+    'custom_filters',
+    #'widget_tweaks'
+    'rest_framework_swagger',
+    'rest_framework',
     #'rest_framework_simplejwt',
-    #'drf_yasg',
+    'drf_yasg',
 ]
 
 '''
@@ -87,6 +87,31 @@ SWAGGER_SETTINGS = {
     },
 }
 '''
+
+'''SWAGGER_SETTINGS = {
+    'USE_SESSION_AUTH': False,
+    'api_version': '1.0',
+    'enabled_methods': ['get', 'post', 'put', 'patch', 'delete'],
+    'SECURITY_DEFINITIONS': {
+        'basic': {
+            'type': 'basic',
+        },
+    },
+}'''
+
+if DEBUG:
+    DRF_YASG_SWAGGER_SETTINGS = {
+        'USE_SESSION_AUTH': False,
+        'api_version': '1.0',
+        'enabled_methods': ['get', 'post', 'put', 'patch', 'delete'],
+        'SECURITY_DEFINITIONS': {
+            'basic': {
+                'type': 'basic',
+            },
+        },
+    }
+else:
+    DRF_YASG_SWAGGER_SETTINGS = None
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
@@ -180,6 +205,10 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_URL = '/home/login/'
+
+LOGIN_REDIRECT_URL = '/home/pagina_inicial/'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

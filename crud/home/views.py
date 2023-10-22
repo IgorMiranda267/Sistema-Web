@@ -1,12 +1,6 @@
-# cadastro/views.py
-from django.shortcuts import render, redirect
-from django.shortcuts import render
 from django.contrib.auth import authenticate, login
-from .forms import LoginForm
-# users/views.py
+from .forms import LoginForm, RegisterForm
 from django.shortcuts import render, redirect
-from django.contrib.auth import login
-from .forms import RegisterForm
 
 from django.contrib.auth import authenticate
 from django.contrib.auth import logout
@@ -17,6 +11,8 @@ def pagina_inicial(request):
     return render(request, 'home/pagina_inicial.html')
 
 def login_view(request):
+    next_url = request.GET.get('next')
+    
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():
@@ -25,15 +21,14 @@ def login_view(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
-                # Redirecionar para a página inicial após o login bem-sucedido
+                if next_url:
+                    return redirect(next_url)
                 return redirect('pagina_inicial')
             else:
-                # Adicionar uma mensagem de erro se a senha estiver incorreta
                 messages.error(request, 'Usuário ou senha incorretos')
     else:
         form = LoginForm()
     return render(request, 'home/login.html', {'form': form})
-
 
 def register(request):
     if request.method == "POST":
