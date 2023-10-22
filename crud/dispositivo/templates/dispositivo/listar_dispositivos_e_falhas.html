@@ -13,7 +13,7 @@
                 <h2 class="mb-0">
                     <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse{{ dispositivo.id }}"
                         aria-expanded="false" aria-controls="collapse{{ dispositivo.id }}">
-                        {{ dispositivo.departamento }} - {{ dispositivo.laboratorio }} - {{ dispositivo.dispositivo }}
+                        {{ dispositivo.sala }} - ID: {{ dispositivo.identificacao_dispositivo }} - {{ dispositivo.dispositivo }}
                         - Tipo: {{ dispositivo.get_tipo_dispositivo_display }}
                     </button>
                     <a href="{% url 'detalhes_dispositivo' dispositivo.id %}" class="btn btn-info float-right ml-2">Ir para detalhes do dispositivo & QR Code</a> 

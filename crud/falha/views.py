@@ -5,20 +5,22 @@ from .forms import FalhaForm, FormManutencao
 from django.contrib.auth.decorators import login_required
 
 @login_required
-def cadastrar_falha(request):
-    
+def cadastrar_falha(request, dispositivo_id=None):
     if request.method == 'POST':
         form = FalhaForm(request.POST)
-        print(f"Form {form}")
         if form.is_valid():
             falha = form.save(commit=False)
             falha.protocolo = gerar_protocolo()
             falha.save()
             return redirect('listar_falhas')
     else:
-        form = FalhaForm()
+        if dispositivo_id:
+            form = FalhaForm(initial={'dispositivo': dispositivo_id})
+        else:
+            form = FalhaForm()
 
     return render(request, 'falha/cadastrar_falha.html', {'form': form})
+
  
 @login_required   
 def listar_falhas(request):

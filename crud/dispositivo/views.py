@@ -16,7 +16,6 @@ import random
 import string
 from django.contrib.auth.decorators import login_required
 
-@login_required
 def gerar_protocolo(length=6):
     caracteres_permitidos = string.ascii_uppercase + string.digits
     protocolo = ''.join(random.choice(caracteres_permitidos) for _ in range(length))
@@ -39,6 +38,7 @@ def cadastro_dispositivo(request):
             full_url = f"{custom_domain}{detalhes_url}"
             qr.add_data(full_url)
             qr.make(fit=True)
+            print(full_url)
             
             img = qr.make_image(fill_color="black", back_color="white")
             buffer = BytesIO()
