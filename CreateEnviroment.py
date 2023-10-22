@@ -22,7 +22,7 @@ comando_ativacao = ""
 
 if os.name == 'nt':  # Windows
     comando_ativacao = f".\\{nome_ambiente}\\Scripts\\activate"
-    ubprocess.run(comando_ativacao, shell=True)
+    subprocess.run(comando_ativacao, shell=True)
     print(f"Para ativar o ambiente: {comando_ativacao}")
 
 else:  # macOS e Linux
