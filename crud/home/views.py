@@ -1,16 +1,18 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from .forms import LoginForm, RegisterForm
 from django.shortcuts import render, redirect
-
-from django.contrib.auth import authenticate
-from django.contrib.auth import logout
 from django.contrib import messages
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 def pagina_inicial(request):
     
     return render(request, 'home/pagina_inicial.html')
 
 def login_view(request):
+    if request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('pagina_inicial'))
+    
     next_url = request.GET.get('next')
     
     if request.method == 'POST':
