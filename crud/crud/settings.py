@@ -143,8 +143,24 @@ TEMPLATES = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = [
+    'home.auth_backends.CustomUserModelBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]
+
+
+AUTH_USER_MODEL = 'home.CustomUser'
+
 WSGI_APPLICATION = 'crud.wsgi.application'
 
+
+# Configurações de Email
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'filmesapi24@gmail.com'
+EMAIL_HOST_PASSWORD = 'okkp oidl zfwe dxeo'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases

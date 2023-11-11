@@ -3,8 +3,10 @@ from dispositivo.views import gerar_protocolo
 from .models import Falha, Manutencao
 from .forms import FalhaForm, FormManutencao
 from django.contrib.auth.decorators import login_required
+from home.decorator import user_has_permission
 
 @login_required
+@user_has_permission('falha.add_falha')
 def cadastrar_falha(request, dispositivo_id=None):
     if request.method == 'POST':
         form = FalhaForm(request.POST)
@@ -23,6 +25,7 @@ def cadastrar_falha(request, dispositivo_id=None):
 
  
 @login_required   
+@user_has_permission('falha.view_falha')
 def listar_falhas(request):
     falhas_com_manutencao = []
 
@@ -44,6 +47,7 @@ def listar_falhas(request):
     return render(request, 'falha/listar_falhas.html', {'falhas': falhas_com_manutencao})
 
 @login_required
+@user_has_permission('falha.add_manutencao')
 def cadastrar_manutencao(request, falha_id=None):
     falha = None
     if falha_id:
@@ -67,11 +71,13 @@ def cadastrar_manutencao(request, falha_id=None):
     return render(request, 'falha/cadastrar_manutencao.html', {'manutencao_form': form, 'falha': falha, 'falha_id': falha_id})
 
 @login_required
+@user_has_permission('falha.view_manutencao')
 def listar_manutencoes(request):
     manutencoes = Manutencao.objects.all()
     return render(request, 'falha/listar_manutencoes.html', {'manutencoes': manutencoes})
 
 @login_required
+@user_has_permission('falha.change_manutencao')
 def editar_manutencao(request, manutencao_id):
     manutencao = get_object_or_404(Manutencao, pk=manutencao_id)
     if request.method == 'POST':
@@ -86,6 +92,7 @@ def editar_manutencao(request, manutencao_id):
     return render(request, 'falha/editar_manutencao.html', {'form': form, 'manutencao': manutencao})
 
 @login_required
+@user_has_permission('falha.change_manutencao')
 def atualizar_status_manutencao(request, manutencao_id):
     manutencao = get_object_or_404(Manutencao, pk=manutencao_id)
     if request.method == 'POST':
