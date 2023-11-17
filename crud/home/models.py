@@ -22,14 +22,20 @@ class CustomUser(AbstractUser):
     )
 
 def create_groups():
-    admin_group, _ = Group.objects.get_or_create(name='Administrador')
-    user_group, _ = Group.objects.get_or_create(name='Usuário')
+    try:
+        admin_group, _ = Group.objects.get_or_create(name='Administrador')
+        user_group, _ = Group.objects.get_or_create(name='Usuário')
 
-    admin_permissions = Permission.objects.filter(content_type__app_label='home')
-    admin_group.permissions.set(admin_permissions)
+        admin_permissions = Permission.objects.filter(content_type__app_label='home')
+        admin_group.permissions.set(admin_permissions)
 
-    user_permissions = Permission.objects.filter(
-        content_type__app_label='home',
-        codename__in=['add_manutencao', 'change_manutencao']
-    )
-    user_group.permissions.set(user_permissions)
+        user_permissions = Permission.objects.filter(
+            content_type__app_label='home',
+            codename__in=['add_manutencao', 'change_manutencao']
+        )
+        user_group.permissions.set(user_permissions)
+    except Exception as e:
+        print('\033[92m' + 'Ocorreu um erro padrão de não existência de grupo.' + '\033[0m')
+        print('\033[91m' + str(e) + '\033[0m')
+        print('\033[92m' + 'Realize a migration normalmente.' + '\033[0m')
+        pass
