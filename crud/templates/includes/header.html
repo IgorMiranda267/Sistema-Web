@@ -76,6 +76,10 @@
                         <a class="nav-link" href="{% url 'schema-swagger-ui' %}">Nossa API</a>
                     </li>
 
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'politica' %}">Politica</a>
+                    </li>
+
                     {% if user.is_staff %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'admin:index' %}" target="_blank">Painel de Admin</a>

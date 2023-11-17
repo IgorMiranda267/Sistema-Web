@@ -21,6 +21,10 @@ def pagina_inicial(request):
     
     return render(request, 'home/pagina_inicial.html')
 
+def politica(request):
+    
+    return render(request, 'home/politica.html')
+
 def login_view(request):
     if request.user.is_authenticated:
         return HttpResponseRedirect(reverse('pagina_inicial'))

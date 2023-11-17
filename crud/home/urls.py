@@ -6,6 +6,7 @@ urlpatterns = [
 
    path('', pagina_inicial, name='pagina_inicial'),
    path('login/', login_view, name='login'),
+   path('politica/', politica, name='politica'),
    path("register/", register, name="register"),
    path('logout/', logout_view, name='logout'),
     path('redefinir-senha/', change_password_request, name='change_password_request'),
