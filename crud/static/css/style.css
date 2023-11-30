@@ -23,8 +23,10 @@ footer {
 }
 
 .titulo {
-    color: #bdbaba; /* Cinza claro */
-    font-family: 'Georgia', serif; /* Tipo de fonte */
+    color: #bdbaba;
+    /* Cinza claro */
+    font-family: 'Georgia', serif;
+    /* Tipo de fonte */
     /* font-size: 2em; Tamanho da fonte */
     /* text-shadow: 2px 2px 4px #000000; Sombra do texto */
 }
@@ -66,14 +68,15 @@ footer {
     border: none;
     padding: 0.5rem 2rem;
     font-weight: bold;
+    align-self: flex-end;
 }
 
 .btn-primary:hover {
     background-color: #0056b3;
 }
 
-/* Estilos para o link "Register" abaixo do botão */
-.small a{
+
+.small a {
     text-decoration: none;
     color: #007bff;
 }
@@ -83,14 +86,14 @@ footer {
     color: #0056b3;
 }
 
-/*login*/
+
 .gradient-custom {
-    /* fallback for old browsers */
-    background: #6a11cb;
-    
-    /* Chrome 10-25, Safari 5.1-6 */
-    background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
-    
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))
-    }
+    background: rgb(3,3,3);
+    background: radial-gradient(circle, rgba(3,3,3,1) 20%, rgba(70,220,252,1) 100%);
+    /*background-color: white;*/
+}
+
+svg.google-icon-svg {
+    width: 24px; 
+    height: 24px; 
+}

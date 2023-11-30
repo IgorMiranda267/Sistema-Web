@@ -1,5 +1,5 @@
 # cadastro/urls.py
-from django.urls import path
+from django.urls import path, include
 from .views import *
 
 urlpatterns = [
@@ -15,5 +15,7 @@ urlpatterns = [
     path('admin_approval_page/', admin_approval_page, name='admin_approval_page'),
    path('admin_approval_page/', admin_approval_page, name='admin_approval_page'),
     path('approve_user/<int:user_id>/', approve_user, name='approve_user'),  
-
+    path('accounts/', include('allauth.urls')),
+    path('accounts/', include('allauth.socialaccount.urls')),
+    path('social-auth/', include('social_django.urls', namespace='social')),
 ]
