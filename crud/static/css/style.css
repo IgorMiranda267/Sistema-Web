@@ -42,7 +42,17 @@ footer {
 
 .card {
     border: none;
+    width: 100% !important; 
+    max-width: 600px !important; 
+    height: 100% !important; 
+    overflow: hidden !important;
 }
+
+.card-body {
+    padding: 2rem;
+    height: 100% !important; 
+}
+
 
 .card-header {
     /*background-color: #007bff;
@@ -55,10 +65,6 @@ footer {
     color: rgb(15, 15, 15) !important;
 }
 
-.card-body {
-    padding: 2rem;
-}
-
 .form-group {
     margin-bottom: 1.5rem;
 }
@@ -68,7 +74,7 @@ footer {
     border: none;
     padding: 0.5rem 2rem;
     font-weight: bold;
-    align-self: flex-end;
+    align-self: flex-end !important;
 }
 
 .btn-primary:hover {

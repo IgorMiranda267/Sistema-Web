@@ -40,10 +40,8 @@ INSTALLED_APPS = [
     'falha',
     'home',
     'custom_filters',
-    # 'widget_tweaks'
     'rest_framework_swagger',
     'rest_framework',
-    # 'rest_framework_simplejwt',
     'drf_yasg',
     'django.contrib.sites',
     'allauth',
@@ -54,46 +52,6 @@ INSTALLED_APPS = [
 ]
 
 SITE_ID = 1
-
-'''
-REST_FRAMEWORK = {
-    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-    ],
-    'DEFAULT_PERMISSION_CLASSES': (
-        #'rest_framework.permissions.IsAuthenticated',
-    ),
-}
-
-SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
-    'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
-    'SLIDING_TOKEN_LIFETIME': timedelta(days=112),
-    'ALGORITHM': 'HS256',
-}
-
-SWAGGER_SETTINGS = {
-    "SECURITY_DEFINITIONS": {
-        "Bearer": {
-            "type": "apiKey",
-            "name": "Authorization",
-            "in": "header",
-        },
-    },
-}
-'''
-
-'''SWAGGER_SETTINGS = {
-    'USE_SESSION_AUTH': False,
-    'api_version': '1.0',
-    'enabled_methods': ['get', 'post', 'put', 'patch', 'delete'],
-    'SECURITY_DEFINITIONS': {
-        'basic': {
-            'type': 'basic',
-        },
-    },
-}'''
 
 if DEBUG:
     DRF_YASG_SWAGGER_SETTINGS = {
@@ -146,22 +104,6 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
     'social_core.backends.google.GoogleOAuth2'
 ]
-
-SOCIALACCOUNT_PROVIDERS = {
-    'google': {
-        'APP': {
-            'client_id': config('CLIENT_ID'),
-            'secret': config('SECRET'),
-        },
-        'SCOPE': [
-            'profile', 'email',
-        ],
-
-        'AUTH PARAMS': {
-            'access_type': 'offline',
-        }
-    }
-}
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = config('CLIENT_ID')
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = config('SECRET')

@@ -15,7 +15,7 @@
                         <div class="mb-md-5 mt-md-4 pb-5">
 
                             <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
-                            <p class="text-white-50 mb-5">Please enter your login and password!</p>
+                            <p class="text-white-50 mb-5">Por favor, insira seu nome de usuário e senha!</p>
 
                             <form method="POST">
                                 {% csrf_token %}
@@ -31,12 +31,12 @@
                                 <div class="form-outline form-white mb-4">
                                     <input type="text" id="id_username" class="form-control form-control-lg"
                                         name="username" required />
-                                    <label class="form-label" for="id_username">Username</label>
+                                    <label class="form-label" for="id_username">Nome de Usuário</label>
                                 </div>
                                 <div class="form-outline form-white mb-4">
                                     <input type="password" id="id_password" class="form-control form-control-lg"
                                         name="password" required />
-                                    <label class="form-label" for="id_password">Password</label>
+                                    <label class="form-label" for="id_password">Senha</label>
                                 </div>
 
                                 <button class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
@@ -57,14 +57,14 @@
                                                 <path fill="none" d="M0 0h48v48H0z"></path>
                                             </g>
                                         </svg>
-                                        Login with Google
+                                        Login com o Google
                                     </a>
                                 </div>
 
                             </form>
                             <br>
                             <p class="mb-0">Não possui uma conta? <a href="{% url 'register' %}"
-                                    class="text-white-50 fw-bold">Sign Up</a></p>
+                                    class="text-white-50 fw-bold">Cadastre-se</a></p>
                             <p class="mb-0">Esqueceu a senha? <a href="{% url 'change_password_request' %}"
                                     class="text-white-50 fw-bold">Redefinir Senha</a></p>
                         </div>
