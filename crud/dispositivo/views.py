@@ -15,6 +15,7 @@ import base64
 import random
 import string
 from django.contrib.auth.decorators import login_required
+from home.decorator import user_has_permission
 
 def gerar_protocolo(length=6):
     caracteres_permitidos = string.ascii_uppercase + string.digits
@@ -22,6 +23,7 @@ def gerar_protocolo(length=6):
     return protocolo
 
 @login_required
+@user_has_permission('dispositivo.add_cadastrodispositivo')
 def cadastro_dispositivo(request):
     salas = Sala.objects.all()
     if request.method == 'POST':
@@ -44,11 +46,13 @@ def cadastro_dispositivo(request):
             buffer = BytesIO()
             img.save(buffer, format="PNG")
             
+            qr_code_base64 = base64.b64encode(buffer.getvalue()).decode('utf-8')
+            
             file_name = f'qrcodes/qrcode_{novo_dispositivo.id}.png'
             default_storage.save(file_name, ContentFile(buffer.getvalue()))
             novo_dispositivo.qr_code = file_name
             novo_dispositivo.save()
-            qr_code_obj = QRCode(dispositivo=novo_dispositivo, qr_code_base64=None)
+            qr_code_obj = QRCode(dispositivo=novo_dispositivo, qr_code_base64=qr_code_base64)
             qr_code_obj.save()
             
             print("Novo dispositivo salvo com sucesso:", novo_dispositivo)
@@ -60,6 +64,7 @@ def cadastro_dispositivo(request):
     return render(request, 'dispositivo/cadastro_dispositivo.html', {'form': form, 'salas': salas})
 
 @login_required
+@user_has_permission('dispositivo.change_cadastrodispositivo')
 def editar_dispositivo(request, dispositivo_id):
     dispositivo = get_object_or_404(CadastroDispositivo, pk=dispositivo_id)
     if request.method == 'POST':
@@ -74,6 +79,7 @@ def editar_dispositivo(request, dispositivo_id):
     return render(request, 'dispositivo/editar_dispositivo.html', {'form': form})
 
 @login_required
+@user_has_permission('dispositivo.delete_cadastrodispositivo')
 def excluir_dispositivo(request, dispositivo_id):
     dispositivo = get_object_or_404(CadastroDispositivo, pk=dispositivo_id)
     if request.method == 'POST':
@@ -82,11 +88,13 @@ def excluir_dispositivo(request, dispositivo_id):
     return render(request, 'dispositivo/excluir_dispositivo.html', {'dispositivo': dispositivo})
 
 @login_required
+@user_has_permission('dispositivo.view_cadastrodispositivo')
 def listar_dispositivos_e_falhas(request):
     dispositivos = CadastroDispositivo.objects.all()
     return render(request, 'dispositivo/listar_dispositivos_e_falhas.html', {'dispositivos': dispositivos})
 
 @login_required
+@user_has_permission('dispositivo.view_cadastrodispositivo')
 def detalhes_dispositivo(request, dispositivo_id):
     dispositivo = CadastroDispositivo.objects.get(pk=dispositivo_id)
     qr_code_obj = QRCode.objects.get(dispositivo=dispositivo)

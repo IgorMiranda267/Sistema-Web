@@ -9,6 +9,8 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/cadastro.css' %}">
     <link rel="icon" type="image/x-icon" href="{% static 'imagens/maintenance.ico' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+        integrity="sha384-..." crossorigin="anonymous">
 </head>
 
 <body>
@@ -71,16 +73,30 @@
                             <a class="dropdown-item" href="{% url 'listar_salas' %}">Salas Cadastradas</a>
                         </div>
                     </li>
-                    
+
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'schema-swagger-ui' %}">Nossa API</a>
                     </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'politica' %}">Politica</a>
+                    </li>
+
+                    {% if user.is_staff %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'admin:index' %}" target="_blank">Painel de Admin</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'admin_approval_page' %}">Aprovação de Usuários</a>
+                    </li>
+                    {% endif %}
 
                     <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
                     {% else %}
                     <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'register' %}">Cadastre-se</a></li>
                     {% endif %}
+
                 </ul>
             </div>
         </div>
