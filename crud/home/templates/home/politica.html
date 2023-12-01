@@ -5,51 +5,38 @@
 
 {% include 'includes/header.html' %}
 
-<body>
+<body class="bg-light">
 
-    <section class="vh-100 gradient-custom">
-        <div class="container py-5 h-100">
-            <div class="row d-flex justify-content-center align-items-center h-100">
-                <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-                    <div class="card bg-dark text-white" style="border-radius: 1rem; max-height: 90vh; overflow: auto;">
-                        <div class="card-body p-5 text-center h-100">
+    <div class="container py-5">
+        <div class="row d-flex justify-content-center align-items-center">
+            <div class="col-md-8">
+                <div class="p-5 bg-white rounded shadow">
+                    <h2 class="fw-bold mb-4 text-uppercase text-center">Política de Segurança do Sistema FixFlow</h2>
+                    <p class="mb-4 text-center text-muted">Diretrizes para garantir a confidencialidade, integridade e disponibilidade dos dados no sistema.</p>
 
-                            <div class="mb-md-5 mt-md-4 pb-5">
+                    <ol class="list-unstyled">
+                        <li class="mb-4">
+                            <strong>Responsabilidades do Usuário</strong>
+                            <ul class="list-unstyled ml-3">
+                                <li>Cada usuário é responsável por manter a confidencialidade de suas credenciais de acesso.</li>
+                                <li>O acesso ao sistema deve ser restrito a usuários autorizados apenas.</li>
+                                <li>Relatar imediatamente qualquer atividade suspeita ou violação de segurança ao administrador do sistema.</li>
+                            </ul>
+                        </li>
 
-                                <h2 class="fw-bold mb-2 text-uppercase">Política de Segurança do Sistema FixFlow</h2>
-                                <p class="text-white-50 mb-5">Diretrizes para garantir a confidencialidade, integridade e disponibilidade dos dados no sistema.</p>
-
-                                <ol>
-                                    <li>
-                                        <strong>Responsabilidades do Usuário</strong>
-                                        <ul>
-                                            <li>Cada usuário é responsável por manter a confidencialidade de suas credenciais de acesso.</li>
-                                            <li>O acesso ao sistema deve ser restrito a usuários autorizados apenas.</li>
-                                            <li>Relatar imediatamente qualquer atividade suspeita ou violação de segurança ao administrador do sistema.</li>
-                                        </ul>
-                                    </li>
-
-                                    <li>
-                                        <strong>Cadastro de Dispositivos</strong>
-                                        <ul>
-                                            <li>A inclusão de dispositivos deve seguir procedimentos de validação rigorosos para garantir a legitimidade.</li>
-                                            <li>Informações sensíveis, como senhas e chaves de acesso, devem ser armazenadas de forma segura e criptografada.</li>
-                                            <li>Regularmente revisar e atualizar o cadastro de dispositivos para remover dispositivos não autorizados ou desativados.</li>
-                                        </ul>
-                                    </li>
-
-                                    <!-- Adicione outras seções conforme necessário -->
-
-                                </ol>
-
-                            </div>
-
-                        </div>
-                    </div>
+                        <li class="mb-4">
+                            <strong>Cadastro de Dispositivos</strong>
+                            <ul class="list-unstyled ml-3">
+                                <li>A inclusão de dispositivos deve seguir procedimentos de validação rigorosos para garantir a legitimidade.</li>
+                                <li>Informações sensíveis, como senhas e chaves de acesso, devem ser armazenadas de forma segura e criptografada.</li>
+                                <li>Regularmente revisar e atualizar o cadastro de dispositivos para remover dispositivos não autorizados ou desativados.</li>
+                            </ul>
+                        </li>
+                    </ol>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
     {% include 'includes/footer.html' %}
 
